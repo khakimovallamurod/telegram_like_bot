@@ -8,3 +8,7 @@ keyboard = [
 inline_keyboard = {
     'inline_keyboard': keyboard,
 }
+reply_keyboard = {
+    'keyboard': keyboard,
+    'resize_keyboard': True
+}

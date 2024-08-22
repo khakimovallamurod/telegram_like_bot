@@ -31,8 +31,8 @@ class TelegramBot:
         :param text: Text of the message to send.
         """
         url = self.api_url + 'sendMessage'
-        params = {'chat_id': chat_id, 'text': text}
-        requests.get(url, params=params)
+        params = {'chat_id': chat_id, 'text': text, 'reply_markup': keyboards.reply_keyboard}
+        requests.post(url, json=params)
     
     def send_photo(self, chat_id: int, photo: str):
         """
@@ -77,7 +77,8 @@ class TelegramBot:
                     elif update['message'].get('photo')!=None:
                         photo = update['message']['photo'][0]['file_id']
                         self.send_photo(chat_id, photo)
-                        
+                        callback_updetes = self.get_updates()
+                        print(callback_updetes)
                         self.last_update_id = update['update_id'] + 1
 
     def run(self):
